@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="2017" />
+  <title>Teórico: Máquinas de Turing</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">@font-face {
+font-family: octicons-link;
+src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+line-height: 1.5;
+color: #24292e;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+}
+body {
+box-sizing: border-box;
+min-width: 200px;
+max-width: 980px;
+margin: 0 auto;
+padding: 45px;
+}
+@media (max-width: 767px) {
+body {
+padding: 15px;
+}
+}
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+img {
+border-style: none;
+}
+code,
+kbd,
+pre {
+font-family: monospace, monospace;
+font-size: 1em;
+}
+hr {
+box-sizing: content-box;
+height: 0;
+overflow: visible;
+}
+input {
+font: inherit;
+margin: 0;
+}
+input {
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+* {
+box-sizing: border-box;
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+a {
+color: #0366d6;
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: 600;
+}
+hr {
+height: 0;
+margin: 15px 0;
+overflow: hidden;
+background: transparent;
+border: 0;
+border-bottom: 1px solid #dfe2e5;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 0;
+margin-bottom: 0;
+}
+h1 {
+font-size: 32px;
+font-weight: 600;
+}
+h2 {
+font-size: 24px;
+font-weight: 600;
+}
+h3 {
+font-size: 20px;
+font-weight: 600;
+}
+h4 {
+font-size: 16px;
+font-weight: 600;
+}
+h5 {
+font-size: 14px;
+font-weight: 600;
+}
+h6 {
+font-size: 12px;
+font-weight: 600;
+}
+p {
+margin-top: 0;
+margin-bottom: 10px;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code {
+font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+font-size: 12px;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 16px;
+}
+hr {
+height: 0.25em;
+padding: 0;
+margin: 24px 0;
+background-color: #e1e4e8;
+border: 0;
+}
+blockquote {
+padding: 0 1em;
+color: #6a737d;
+border-left: 0.25em solid #dfe2e5;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 24px;
+margin-bottom: 16px;
+font-weight: 600;
+line-height: 1.25;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid #eaecef;
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid #eaecef;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+color: #6a737d;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+word-wrap: break-all;
+}
+li>p {
+margin-top: 16px;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: 600;
+}
+dl dd {
+padding: 0 16px;
+margin-bottom: 16px;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: 600;
+}
+table th,
+table td {
+padding: 6px 13px;
+border: 1px solid #dfe2e5;
+}
+table tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1;
+}
+table tr:nth-child(2n) {
+background-color: #f6f8fa;
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff;
+}
+img[align=right] {
+padding-left: 20px;
+}
+img[align=left] {
+padding-right: 20px;
+}
+code {
+padding: 0.2em 0.4em;
+margin: 0;
+font-size: 85%;
+background-color: rgba(27,31,35,0.05);
+border-radius: 3px;
+}
+pre {
+word-wrap: normal;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 3px;
+}
+pre code {
+display: inline;
+max-width: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0;
+}
+hr {
+border-bottom-color: #eee;
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Teórico: Máquinas de Turing</h1>
+<p class="author">2017</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#disparador" id="toc-disparador">Disparador</a></li>
+<li><a href="#computadoras-primitivas" id="toc-computadoras-primitivas">Computadoras primitivas</a></li>
+<li><a href="#alan-turing-y-sus-máquinas" id="toc-alan-turing-y-sus-máquinas">Alan Turing y sus máquinas</a></li>
+<li><a href="#el-juego-de-turing" id="toc-el-juego-de-turing">El Juego
+de Turing</a></li>
+<li><a href="#ejemplo" id="toc-ejemplo">Ejemplo</a></li>
+<li><a href="#cómo-representar-la-ejecución-de-una-máquina-en-hoja-de-papel" id="toc-cómo-representar-la-ejecución-de-una-máquina-en-hoja-de-papel">Cómo
+representar la ejecución de una máquina en hoja de papel</a></li>
+<li><a href="#escritura-compacta-de-una-traza" id="toc-escritura-compacta-de-una-traza">Escritura compacta de una
+traza</a></li>
+<li><a href="#preguntas-máquinas-que-no-terminan" id="toc-preguntas-máquinas-que-no-terminan">Preguntas: máquinas que no
+terminan</a></li>
+<li><a href="#observación-terminar-o-no-terminar" id="toc-observación-terminar-o-no-terminar">Observación: Terminar o no
+terminar</a></li>
+<li><a href="#la-campeona-de-la-categoría-4-estados" id="toc-la-campeona-de-la-categoría-4-estados">La campeona de la
+categoría “4 estados”</a></li>
+<li><a href="#la-campeona-de-la-categoria-5-estados" id="toc-la-campeona-de-la-categoria-5-estados">La campeona de la
+categoria “5 estados”</a></li>
+<li><a href="#máquinas-que-hacen-cosas-útiles" id="toc-máquinas-que-hacen-cosas-útiles">Máquinas que hacen cosas
+útiles</a></li>
+<li><a href="#bien-cuál-es-la-relación-con-el-resto-de-la-materia" id="toc-bien-cuál-es-la-relación-con-el-resto-de-la-materia">Bien, ¿cuál
+es la relación con el resto de la materia?</a></li>
+<li><a href="#proxima-etapa" id="toc-proxima-etapa">Proxima
+etapa</a></li>
+<li><a href="#links-útiles" id="toc-links-útiles">Links útiles</a></li>
+</ul>
+</nav>
+<p>Este apunte es una guía para el docente.</p>
+<h1 id="disparador">Disparador</h1>
+<ul>
+<li>qué es una computadora? qué significa programar?</li>
+<li>qué puede calcular una computadora? hay cosas que <em>no</em> se
+pueden calcular con una computadora?</li>
+<li>sorprendentemente, hay gente que pudo contestar a esta útima
+pregunta pero sin tener ninguna computadora a mano</li>
+<li>de hecho contestó antes de que se fabricará la primera “computadora”
+(tal como las que conocemos hoy)</li>
+</ul>
+<h1 id="computadoras-primitivas">Computadoras primitivas</h1>
+<ul>
+<li>antes del siglo 20, se fabricaron unas “computadoras” en épocas
+distintas</li>
+<li><a href="https://es.wikipedia.org/wiki/Pascalina">Calculadora de
+Blas Pascal</a></li>
+<li><a href="https://es.wikipedia.org/wiki/Mecanismo_de_Anticitera">Mecanismo
+de Anticitera</a></li>
+<li><a href="https://es.wikipedia.org/wiki/El_Turco">El Turco</a></li>
+<li><a href="https://es.wikipedia.org/wiki/M%C3%A1quina_anal%C3%ADtica">Máquina
+Analítica de Babbage</a></li>
+<li>pero no son computadoras, son más bien automatas o calculadoras,
+porque hacen solo 1 tipo de cálculo o una acción, y no puede salir de
+esa función</li>
+<li>una computadora es una máquina programable que puede hacer cualquier
+cálculo</li>
+<li>hoy en día, los teléfonos celulares por ejemplos son computadoras
+porque les podemos instalar cualquier aplicación</li>
+</ul>
+<h1 id="alan-turing-y-sus-máquinas">Alan Turing y sus máquinas</h1>
+<ul>
+<li>matemático inglés</li>
+<li>en el 1936 publica el artículo: “Sobre los números calculables” (“On
+computable numbers”).</li>
+<li>no había computadoras en esa época</li>
+<li>presenta sus “máquinas de cálculo”</li>
+<li><a href="https://es.wikipedia.org/wiki/M%C3%A1quina_de_Turing">Máquina de
+Turing</a></li>
+</ul>
+<h1 id="el-juego-de-turing">El Juego de Turing</h1>
+<p>Vamos a definir “programas” que también podemos llamar “máquinas de
+Turing”. Un programa se puede ejecutar.</p>
+<p>Cuando una máquina se ejecuta, los efectos de esa ejecución tienen
+consecuencias concretas.</p>
+<p>Primero, la máquina tiene un estado interno, que puede cambiar
+durante la ejecución. Es un valor que sirve para representar en qué
+etapa del cálculo estamos.</p>
+<p>Segundo, la máquina tiene acceso a una cinta donde puede leer y
+escribir símbolos. Esa cinta es parecida una cinta de papel, pero tiene
+diferencias importantes. Es constituida de casillas, y solo se puede
+escribir un símbolo dentro de cada casilla (un poco como en un
+formulario). También se puede escribir un símbolo distinto en una misma
+casilla, en cual caso el símbo anterior es reemplazado. Otra diferencia
+de esa cinta, es que es <em>infinita</em> en las dos direcciones. No se
+olviden que una máquina de Turing es un objeto matemático, así que
+tenemos el derecho de decir que la cinta es infinita!</p>
+<p>Para terminar ese recorrido, tenemos que hablar del <em>cabezal</em>
+de la máquina. El cabezal está siempre frente a alguna casilla. El
+cabezal se puede mover, pero solamente a la casilla de al lado, hacia la
+izquierda o hacia la derecha. El cabezal solo se entera del símbolo que
+está en la casilla que tiene al frente. Y puede escribir algun símbolo
+en esa misma casilla.</p>
+<p>Bien, ahora veamos las reglas del juego:</p>
+<ul>
+<li>fijar un conjunto de símbolos que vamos a usar, y decir con qué
+símbolo la cinta está rellenada inicialmente</li>
+<li>fijar un conjunto de estados internos de la máquina</li>
+<li>definir una máquina. una máquine es definida con reglas, que podemos
+presentar como una tabla (llamada “tabla de transiciones”).</li>
+</ul>
+<p>En esta clase los símbolos que usamos para escribir en la cinta son 0
+y 1, y la cinta está inicialmente rellenada de 0.</p>
+<p>Vamos a empezar pensando en máquinas con solo 2 estados internos, “a”
+y “b”, despues vamos a agregar más estados.</p>
+<p>Ahora, la tabla de transiciones es un conjunto de reglas de la forma
+siguiente:</p>
+<ul>
+<li>para cada símbolo leido en la cinta por el cabezal</li>
+<li>y para cada estado interno en el cual la máquina se encuentra</li>
+<li>entonces hay una única <em>instrucción</em> que la máquina debe
+ejecutar.</li>
+</ul>
+<p>Hay dos tipos de instrucciones:</p>
+<ul>
+<li>Tipo 1: “FIN”: la máquina termina su ejecución</li>
+<li>Tipo 2: hacer lo siguiente:
+<ul>
+<li>escribir un símbolo</li>
+<li>mover el cabezal (a la izquierda o a la derecha)</li>
+<li>modificar el estado interno</li>
+<li>seguir la ejecución de la máquina</li>
+</ul></li>
+</ul>
+<h1 id="ejemplo">Ejemplo</h1>
+<p>Esto es una máquina:</p>
+<pre><code>  | 0 | 1 |
+a |1→b|1←a|
+b |1←a|FIN|</code></pre>
+<p>Arrancamos con una cinta blanca, y vemos su ejecución (pizarrón).</p>
+<h1 id="cómo-representar-la-ejecución-de-una-máquina-en-hoja-de-papel">Cómo
+representar la ejecución de una máquina en hoja de papel</h1>
+<ul>
+<li>la cinta es de tamaño infinito pero sabemos que es todo 0 así que no
+hace falta escribir mucho</li>
+<li>representamos la posición del cabezal con un triangulito</li>
+<li>escribimos el estado actual de la máquina abajo del triangulito</li>
+<li>siempre empezamos con cinta blanca y el estado “a”:</li>
+</ul>
+<pre><code>...000...
+    ^
+    a</code></pre>
+<ul>
+<li>escribamos cada configuración abajo de la otra:</li>
+</ul>
+<pre><code>...000...
+    ^
+    a
+...0100...
+     ^
+     b 
+...0110...
+    ^
+    a
+...0110...
+   ^
+   a
+..01110...
+    ^
+    b
+FIN</code></pre>
+<h1 id="escritura-compacta-de-una-traza">Escritura compacta de una
+traza</h1>
+<pre><code>0a
+10b
+1a1
+0a11
+11b1
+FIN</code></pre>
+<h1 id="preguntas-máquinas-que-no-terminan">Preguntas: máquinas que no
+terminan</h1>
+<ol type="1">
+<li>¿Qué podemos decir de una máquina que no usa la instrucción
+“FIN”?</li>
+<li>¿Qué podemos decir de una máquina que tiene instrucciones como
+sigue:</li>
+</ol>
+<pre><code>  | 0 | 1 |
+a |1→a|...|
+b |...|...|</code></pre>
+<ol start="3" type="1">
+<li>Y la siguiente:</li>
+</ol>
+<pre><code>  | 0 | 1 |
+a |..a|...|
+b |...|...|</code></pre>
+<h1 id="observación-terminar-o-no-terminar">Observación: Terminar o no
+terminar</h1>
+<ul>
+<li>Se puede clasificar las máquinas en 2 familias: las que terminan en
+algun momento, y las que no</li>
+<li>Hay máquinas que no terminan por razones obvias</li>
+<li>Pero hay máquinas que no terminan sin que sea claro por qué
+(comportamiento complejo).</li>
+</ul>
+<h1 id="la-campeona-de-la-categoría-4-estados">La campeona de la
+categoría “4 estados”</h1>
+<p>También, hay máquinas que terminan después de muchos pasos, por
+ejemplo:</p>
+<pre><code>  | 0 | 1 |
+a |1→b|1←b|
+b |1←a|0←c|
+c |FIN|1→d|
+d |1→d|0→a|</code></pre>
+<p>Termina después de 107 pasos (es la máquina con 4 estados que tiene
+más aguante).</p>
+<h1 id="la-campeona-de-la-categoria-5-estados">La campeona de la
+categoria “5 estados”</h1>
+<pre><code>  | 0 | 1 |
+a |1→b|1←c|
+b |1→c|1→b|
+c |1→d|0←e|
+d |1←a|1←d|
+e |FIN|0←a|</code></pre>
+<p>Termina después de 47.176.870 pasos.</p>
+<p>No se sabe si hay otra máquina terminante de 5 estados más
+aguantadora. (Actualización: en el 2024 <a href="https://www.quantamagazine.org/amateur-mathematicians-find-fifth-busy-beaver-turing-machine-20240702">se
+demostró que</a> no había otra máquina más aguantadora, es decir esta es
+la campeona de su categoría.)</p>
+<h1 id="máquinas-que-hacen-cosas-útiles">Máquinas que hacen cosas
+útiles</h1>
+<p>Las máquinas pueden hacer sumas, multiplicaciones, etc. si ponemos en
+la cinta los datos de entrada.</p>
+<h1 id="bien-cuál-es-la-relación-con-el-resto-de-la-materia">Bien, ¿cuál
+es la relación con el resto de la materia?</h1>
+<ul>
+<li>No vamos a usar máquinas de Turing para programar, sino un lenguaje
+de programación que se convierte automáticamente a instrucciones
+similares a las de máquinas de Turing</li>
+<li>Esas instrucciones son ejecutadas por las computadoras del
+laboratorio</li>
+</ul>
+<pre><code>+-----------------------------------+----------------------+
+| editar código en lenguaje C       |  resultado visible   |
++-----------------------------------+----------------------+
+| convertir código en instrucciones | resultado &quot;invisible&quot;|
++-----------------------------------+----------------------+</code></pre>
+<ul>
+<li>Un programa común se representa con millones de instrucciones
+(nosotros jugamos con máquinas de hasta 8 instrucciones)</li>
+<li>Ya que es difícil analizar bien una máquina de Turing, es más
+difícil analizar una aplicación o software</li>
+<li>Por eso instalar aplicaciones desde fuentes seguras (evitar viruses
+o software con malas intenciones)</li>
+</ul>
+<h1 id="proxima-etapa">Proxima etapa</h1>
+<ul>
+<li>vamos a descubrir como usar la computadora (ya no vamos a programar
+sobre papel sino editar archivos en la computadora)</li>
+</ul>
+<h1 id="links-útiles">Links útiles</h1>
+<ul>
+<li><a href="https://turingmachinesimulator.com/" class="uri">https://turingmachinesimulator.com/</a> para mostrar
+animacion de MT con input</li>
+</ul>
+</body>
+</html>
