@@ -2,8 +2,6 @@
 
 ## 1. Ejecución de Máquinas de Turing
 
-![cantidad de participantes](group64.png){width=1cm} De 1 a 3 participantes.
-
 Ejecutar las máquinas siguientes. Cuál es el estado final de la cinta?
 Cuántos pasos dura la ejecución?
 
@@ -61,9 +59,6 @@ b |2<a|2>b|FIN|
 
 ## 2. Máquinas Extrañas
 
-
-![cantidad de participantes](group64.png){width=1cm} De 1 a 3 participantes.
-
 Ejecutar las máquinas siguientes. Qué problema tienen?
 Pueden describir lo que pasa en cada caso?
 
@@ -97,8 +92,6 @@ b |2<a|2>b|1<b|
 
 ## 3. Escritura compacta de ejecución
 
-![cantidad de participantes](user64.png){width=1cm} 1 participante.
-
 Como en el ejercicio 1, ejecutar las máquinas siguientes, pero
 usando la escritura compacta de la traza de ejecución.
 
@@ -119,8 +112,6 @@ c |1>b|1<c|
 ~~~
 
 ## 4. Escritura compacta de ejecución.. infinita
-
-![cantidad de participantes](user64.png){width=1cm} 1 participante.
 
 Estas máquinas tienen una ejecución infinita.
 
